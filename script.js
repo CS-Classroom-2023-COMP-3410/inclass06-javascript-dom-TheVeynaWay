@@ -3,8 +3,7 @@ const movesSpan = document.getElementById("moves");
 const timeSpan = document.getElementById("time");
 const restartBtn = document.getElementById("restart");
 
-//'&#127144;', '&#127145;', '&#127146;', '&#127147;', '&#127148;', '&#127149;', '&#127150;'
-let allCards = ['&#127136;', '&#127137;','&#127138;', '&#127139;', '&#127140;', '&#127141;', '&#127142;', '&#127143;']
+let allCards = ['&#127141;', '&#127137;','&#127138;', '&#127139;', '&#127140;', '&#127148;', '&#127149;', '&#127150;']
 
 let gameDeck = [];
 let flipped = [];
@@ -33,11 +32,13 @@ function startGame() {
     gameDeck = [...allCards, ...allCards];
     shuffle(gameDeck);
 
+    const cardBack = '&#127136;';
+
     gameDeck.forEach(val => {
         let card = document.createElement("span");
         card.className = "card";
         card.dataset.value = val;
-        card.innerHTML = "?";
+        card.innerHTML = cardBack;
         card.onclick = () => flipCard(card);
         board.appendChild(card);
     });
@@ -49,7 +50,7 @@ function startGame() {
 }
 
 function flipCard(card) {
-    if (flipped.length === 2 || card.innerHTML !== "?") return;
+    if (flipped.length === 2 || card.innerHTML !== cardBack) return;
 
     card.innerHTML = card.dataset.value;
     flipped.push(card);
