@@ -3,7 +3,8 @@ const movesSpan = document.getElementById("moves");
 const timeSpan = document.getElementById("time");
 const restartBtn = document.getElementById("restart");
 
-let allCards = ['&#127136;', '&#127137;','&#127138;', '&#127139;', '&#127140;', '&#127141;', '&#127142;', '&#127143;', '&#127144;', '&#127145;', '&#127146;', '&#127147;', '&#127148;', '&#127149;', '&#127150;']
+//'&#127144;', '&#127145;', '&#127146;', '&#127147;', '&#127148;', '&#127149;', '&#127150;'
+let allCards = ['&#127136;', '&#127137;','&#127138;', '&#127139;', '&#127140;', '&#127141;', '&#127142;', '&#127143;']
 
 let gameDeck = [];
 let flipped = [];
@@ -34,7 +35,7 @@ function startGame() {
         let card = document.createElement("div");
         card.className = "card";
         card.dataset.value = val;
-        card.textContent = "?";
+        card.innerHTML = "?";
         card.onclick = () => flipCard(card);
         board.appendChild(card);
     });
@@ -46,9 +47,9 @@ function startGame() {
 }
 
 function flipCard(card) {
-    if (flipped.length === 2 || card.textContent !== "?") return;
+    if (flipped.length === 2 || card.innerHTML !== "?") return;
 
-    card.textContent = card.dataset.value;
+    card.innerHTML = card.dataset.value;
     flipped.push(card);
 
     if (flipped.length === 2) {
@@ -59,8 +60,8 @@ function flipCard(card) {
             flipped = [];
         } else {
             setTimeout(() => {
-                flipped[0].textContent = "?";
-                flipped[1].textContent = "?";
+                flipped[0].innerHTML = "?";
+                flipped[1].innerHTML = "?";
                 flipped = [];
             }, 500);
         }
