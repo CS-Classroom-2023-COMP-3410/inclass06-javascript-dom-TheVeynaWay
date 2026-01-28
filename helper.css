@@ -8,5 +8,8 @@
 .card {
     font-size: 48px;
     cursor: pointer;
+}
+
+head, body {
     text-align: center;
 }

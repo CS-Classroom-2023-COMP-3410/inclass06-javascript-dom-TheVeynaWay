@@ -32,7 +32,7 @@ function startGame() {
     shuffle(gameDeck);
 
     gameDeck.forEach(val => {
-        let card = document.createElement("div");
+        let card = document.createElement("span");
         card.className = "card";
         card.dataset.value = val;
         card.innerHTML = "?";
