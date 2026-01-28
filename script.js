@@ -25,6 +25,7 @@ function startGame() {
     moves = 0;
     time = 0;
     flipped = [];
+    matchedCount = 0;
     movesSpan.textContent = moves;
     timeSpan.textContent = time;
     clearInterval(timer);
