@@ -1,25 +1,16 @@
-/*suits = ["heart", "spade", "diamond", "club"]
-
-let deck = ['&#127136;', '&#127137;','&#127138;', '&#127139;', '&#127140;', '&#127141;', '&#127142;', '&#127143;', '&#127144;', '&#127145;', '&#127146;', '&#127147;', '&#127149;', '&#127150;']
-
-let test = document.createElement('div');
-test.innerHTML = deck[0];
-document.body.appendChild(test);*/
-
 const board = document.getElementById("board");
 const movesSpan = document.getElementById("moves");
 const timeSpan = document.getElementById("time");
 const restartBtn = document.getElementById("restart");
 
-const values = ['A','B','C','D','E','F','G','H'];
+let allCards = ['&#127136;', '&#127137;','&#127138;', '&#127139;', '&#127140;', '&#127141;', '&#127142;', '&#127143;', '&#127144;', '&#127145;', '&#127146;', '&#127147;', '&#127148;', '&#127149;', '&#127150;']
 
-let cards = [];
+let gameDeck = [];
 let flipped = [];
 let moves = 0;
 let time = 0;
 let timer;
 
-// shuffle helper
 function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -27,7 +18,6 @@ function shuffle(arr) {
     }
 }
 
-// start/reset game
 function startGame() {
     board.innerHTML = "";
     moves = 0;
@@ -37,10 +27,10 @@ function startGame() {
     timeSpan.textContent = time;
     clearInterval(timer);
 
-    cards = [...values, ...values];
-    shuffle(cards);
+    gameDeck = [...allCards, ...allCards];
+    shuffle(gameDeck);
 
-    cards.forEach(val => {
+    gameDeck.forEach(val => {
         let card = document.createElement("div");
         card.className = "card";
         card.dataset.value = val;
