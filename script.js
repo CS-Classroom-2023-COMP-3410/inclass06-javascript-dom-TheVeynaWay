@@ -11,6 +11,7 @@ let flipped = [];
 let moves = 0;
 let time = 0;
 let timer;
+let matchedCount = 0;
 
 function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -57,7 +58,12 @@ function flipCard(card) {
         movesSpan.textContent = moves;
 
         if (flipped[0].dataset.value === flipped[1].dataset.value) {
+            matchedCount += 2;
             flipped = [];
+            if(matchedCount === gameDeck.length){
+                clearInterval(timer);
+                alert(`You won in ${moves} moves and ${time} seconds! 🎉`);
+            }
         } else {
             setTimeout(() => {
                 flipped[0].innerHTML = "?";
