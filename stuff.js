@@ -1,0 +1,82 @@
+/*suits = ["heart", "spade", "diamond", "club"]
+
+let deck = ['&#127136;', '&#127137;','&#127138;', '&#127139;', '&#127140;', '&#127141;', '&#127142;', '&#127143;', '&#127144;', '&#127145;', '&#127146;', '&#127147;', '&#127149;', '&#127150;']
+
+let test = document.createElement('div');
+test.innerHTML = deck[0];
+document.body.appendChild(test);*/
+
+const board = document.getElementById("board");
+const movesSpan = document.getElementById("moves");
+const timeSpan = document.getElementById("time");
+const restartBtn = document.getElementById("restart");
+
+const values = ['A','B','C','D','E','F','G','H'];
+
+let cards = [];
+let flipped = [];
+let moves = 0;
+let time = 0;
+let timer;
+
+// shuffle helper
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+
+// start/reset game
+function startGame() {
+    board.innerHTML = "";
+    moves = 0;
+    time = 0;
+    flipped = [];
+    movesSpan.textContent = moves;
+    timeSpan.textContent = time;
+    clearInterval(timer);
+
+    cards = [...values, ...values];
+    shuffle(cards);
+
+    cards.forEach(val => {
+        let card = document.createElement("div");
+        card.className = "card";
+        card.dataset.value = val;
+        card.textContent = "?";
+        card.onclick = () => flipCard(card);
+        board.appendChild(card);
+    });
+
+    timer = setInterval(() => {
+        time++;
+        timeSpan.textContent = time;
+    }, 1000);
+}
+
+function flipCard(card) {
+    if (flipped.length === 2 || card.textContent !== "?") return;
+
+    card.textContent = card.dataset.value;
+    flipped.push(card);
+
+    if (flipped.length === 2) {
+        moves++;
+        movesSpan.textContent = moves;
+
+        if (flipped[0].dataset.value === flipped[1].dataset.value) {
+            flipped = [];
+        } else {
+            setTimeout(() => {
+                flipped[0].textContent = "?";
+                flipped[1].textContent = "?";
+                flipped = [];
+            }, 500);
+        }
+    }
+}
+
+restartBtn.onclick = startGame;
+
+startGame();
