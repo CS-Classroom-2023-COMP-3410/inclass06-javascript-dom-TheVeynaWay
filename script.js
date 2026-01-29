@@ -124,3 +124,4 @@ function initGame() {
 
 restartButton.onclick = initGame;
 initGame();
+//why is this not working
